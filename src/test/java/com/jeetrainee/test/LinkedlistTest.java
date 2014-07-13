@@ -109,14 +109,21 @@ public class LinkedlistTest {
 	@Test
 	public void add_Sucsess(){
 		assertEquals(data.size(), 3);
-		data.add(1, "Insert");
+		data.add("Insert");
 		assertEquals(data.size(), 4);
-		assertEquals(data.get(1), "Insert");
+		assertEquals(data.get(3), "Insert");
 	}
 	
 	@Test
 	public void get_Sucsess(){
 		assertEquals(2, data.get(2));
+	}
+	
+	@Test
+	public void add_IndexAndElement(){
+		data.add(3, "3");
+		assertEquals(data.size(), 4);
+		assertEquals(data.get(3), 3);
 	}
 
 }

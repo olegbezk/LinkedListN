@@ -127,8 +127,37 @@ public class Linkedlist<E> implements List<E> {
 	}
 
 	public void add(int index, E element) {
-		// TODO Auto-generated method stub
+		checkPositionIndex(index);
+		
+		if (index == size)
+            linkLast(element);
+        else
+            linkBefore(element, link(index));
 
+	}
+
+	void linkBefore(E element, Link<E> link) {
+		final Link<E> pred = link.prev;
+        final Link<E> newNode = new Link<>(pred, element, link);
+        link.prev = newNode;
+        if (pred == null)
+            first = newNode;
+        else
+            pred.next = newNode;
+        size++;
+		
+	}
+
+ void linkLast(E element) {
+		final Link<E> l = last;
+        final Link<E> newNode = new Link<>(l, element, null);
+        last = newNode;
+        if (l == null)
+            first = newNode;
+        else
+            l.next = newNode;
+        size++;
+		
 	}
 
 	public Link<E> link(int index) {
@@ -192,10 +221,15 @@ public class Linkedlist<E> implements List<E> {
         return -1;
 	}
 	
-	
 	private void checkElementIndex(int index) {
         if (!(index >= 0 && index < size))
             throw new IndexOutOfBoundsException();
     }
+	
+	private void checkPositionIndex(int index) {
+        if (!(index >= 0 && index <= size))
+            throw new IndexOutOfBoundsException();
+    }
+	
 
 }
