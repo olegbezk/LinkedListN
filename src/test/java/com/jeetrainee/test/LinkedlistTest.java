@@ -86,7 +86,7 @@ public class LinkedlistTest {
 	}
 	
 	@Test
-	public void testToArray(){
+	public void toArray(){
 		Object[] dataArray = data.toArray();
 		for (int i = 0; i < dataArray.length; i++) {
 			assertEquals(dataArray[i], data.get(i));
@@ -94,15 +94,17 @@ public class LinkedlistTest {
 	}
 	
 	@Test
-	public void testClear(){
+	public void clear(){
 		assertEquals(null, data.get(0));
 		assertEquals(0, data.size());
 	}
 	
 	@Test
-//	public void testAdd_ClassCast(){
-//		
-//	}
+	public void remove_ByIndex(){
+		data.remove(2);
+		assertEquals(2, data.size());
+		
+	}
 	
 	public void add_Sucsess(){
 		assertEquals(data.size(), 3);

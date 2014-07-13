@@ -36,7 +36,7 @@ public class Linkedlist<E> implements List<E> {
 		return new LinkIterator();
 	}
 
-	private class LinkIterator implements Iterator<E> {
+	private class LinkIterator<E> implements Iterator<E> {
 
 		public boolean hasNext() {
 			// TODO Auto-generated method stub
@@ -109,8 +109,15 @@ public class Linkedlist<E> implements List<E> {
 	}
 
 	public void clear() {
-		first = null;
-		size = 0;
+		for (Link<E> x = first; x != null; ) {
+            Link<E> next = x.next;
+            x.data = null;
+            x.next = null;
+            x.prev = null;
+            x = next;
+        }
+        first = last = null;
+        size = 0;
 
 	}
 
@@ -123,10 +130,51 @@ public class Linkedlist<E> implements List<E> {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public Link<E> link(int index) {
+        // assert isElementIndex(index);
+
+        if (index < (size >> 1)) {
+            Link<E> x = first;
+            for (int i = 0; i < index; i++)
+                x = x.next;
+            return x;
+        } else {
+            Link<E> x = last;
+            for (int i = size - 1; i > index; i--)
+                x = x.prev;
+            return x;
+        }
+        }
 
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(!(index >= 0 && index <= size)){
+			throw new IndexOutOfBoundsException();
+		}
+		
+		    final Link<E> x = link(index);
+		    final E element = x.data;
+	        final Link<E> next = x.next;
+	        final Link<E> prev = x.prev;
+
+	        if (prev == null) {
+	            first = next;
+	        } else {
+	            prev.next = next;
+	            x.prev = null;
+	        }
+
+	        if (next == null) {
+	            last = prev;
+	        } else {
+	            next.prev = prev;
+	            x.next = null;
+	        }
+
+	        x.data = null;
+	        size--;
+		return element;
 	}
 
 	public int indexOf(Object o) {
