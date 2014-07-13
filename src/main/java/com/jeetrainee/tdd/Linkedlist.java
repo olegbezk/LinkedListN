@@ -102,9 +102,47 @@ public class Linkedlist<E> implements List<E> {
 		size++;
 		return true;
 	}
+	
+	E unlink(Link<E> x) {
+        final E element = x.data;
+        final Link<E> next = x.next;
+        final Link<E> prev = x.prev;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            x.prev = null;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+            x.next = null;
+        }
+
+        x.data = null;
+        size--;
+        return element;
+    }
 
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
+		if (o == null) {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (x.data == null) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        } else {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.data)) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
 		return false;
 	}
 
@@ -179,28 +217,7 @@ public class Linkedlist<E> implements List<E> {
 
 		checkElementIndex(index);
 
-		final Link<E> x = link(index);
-		final E element = x.data;
-		final Link<E> next = x.next;
-		final Link<E> prev = x.prev;
-
-		if (prev == null) {
-			first = next;
-		} else {
-			prev.next = next;
-			x.prev = null;
-		}
-
-		if (next == null) {
-			last = prev;
-		} else {
-			next.prev = prev;
-			x.next = null;
-		}
-
-		x.data = null;
-		size--;
-		return element;
+		return unlink(link(index));
 	}
 
 	public int indexOf(Object o) {

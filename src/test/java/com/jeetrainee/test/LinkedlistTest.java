@@ -125,5 +125,11 @@ public class LinkedlistTest {
 		assertEquals(data.size(), 4);
 		assertEquals(data.get(3), 3);
 	}
+	
+	@Test
+	public void remove_Object(){
+		data.remove("1");
+		assertEquals(data.size(), 2);
+	}
 
 }
