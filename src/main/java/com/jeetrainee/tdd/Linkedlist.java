@@ -175,8 +175,21 @@ public class Linkedlist<E> implements List<E> {
 	}
 
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		int index = 0;
+        if (o == null) {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (x.data == null)
+                    return index;
+                index++;
+            }
+        } else {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.data))
+                    return index;
+                index++;
+            }
+        }
+        return -1;
 	}
 	
 	
