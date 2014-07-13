@@ -3,27 +3,25 @@ package com.jeetrainee.tdd;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Linkedlist<E> implements List<E>{
-	
-	private class Link{
-		
+public class Linkedlist<E> implements List<E> {
+
+	private class Link<E> {
+
 		private E data;
-		private Link next; 
-	    
-	    public Link(){}
-	    
-	    public Link(E data){
-	    	this.data = data;
-	    }
-	    
+		private Link<E> next;
+		private Link<E> prev;
+
+		public Link(Link<E> next, E data, Link<E> prev) {
+			this.next = next;
+			this.prev = prev;
+			this.data = data;
+		}
+
 	}
-	
-	private Link first;
-    private int size = 0;
-    
-    public Linkedlist(){
-    	first = null;
-    }
+
+	private Link<E> first;
+	private Link<E> last;
+	private int size = 0;
 
 	public int size() {
 		return size;
@@ -37,7 +35,7 @@ public class Linkedlist<E> implements List<E>{
 		// TODO Auto-generated method stub
 		return new LinkIterator();
 	}
-	
+
 	private class LinkIterator implements Iterator<E> {
 
 		public boolean hasNext() {
@@ -53,9 +51,9 @@ public class Linkedlist<E> implements List<E>{
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
 
 	public Object[] toArray() {
@@ -94,8 +92,15 @@ public class Linkedlist<E> implements List<E>{
 	}
 
 	public boolean add(E e) {
-		// TODO Auto-generated method stub
-		return false;
+		final Link<E> l = last;
+        final Link<E> newNode = new Link<>(l, e, null);
+        last = newNode;
+        if (l == null)
+            first = newNode;
+        else
+            l.next = newNode;
+        size++;
+		return true;
 	}
 
 	public boolean remove(Object o) {
@@ -106,7 +111,7 @@ public class Linkedlist<E> implements List<E>{
 	public void clear() {
 		first = null;
 		size = 0;
-		
+
 	}
 
 	public E get(int index) {
@@ -116,7 +121,7 @@ public class Linkedlist<E> implements List<E>{
 
 	public void add(int index, E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public E remove(int index) {
