@@ -93,13 +93,13 @@ public class Linkedlist<E> implements List<E> {
 
 	public boolean add(E e) {
 		final Link<E> l = last;
-        final Link<E> newNode = new Link<>(l, e, null);
-        last = newNode;
-        if (l == null)
-            first = newNode;
-        else
-            l.next = newNode;
-        size++;
+		final Link<E> newNode = new Link<>(l, e, null);
+		last = newNode;
+		if (l == null)
+			first = newNode;
+		else
+			l.next = newNode;
+		size++;
 		return true;
 	}
 
@@ -109,15 +109,15 @@ public class Linkedlist<E> implements List<E> {
 	}
 
 	public void clear() {
-		for (Link<E> x = first; x != null; ) {
-            Link<E> next = x.next;
-            x.data = null;
-            x.next = null;
-            x.prev = null;
-            x = next;
-        }
-        first = last = null;
-        size = 0;
+		for (Link<E> x = first; x != null;) {
+			Link<E> next = x.next;
+			x.data = null;
+			x.next = null;
+			x.prev = null;
+			x = next;
+		}
+		first = last = null;
+		size = 0;
 
 	}
 
@@ -130,50 +130,50 @@ public class Linkedlist<E> implements List<E> {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public Link<E> link(int index) {
-        // assert isElementIndex(index);
 
-        if (index < (size >> 1)) {
-            Link<E> x = first;
-            for (int i = 0; i < index; i++)
-                x = x.next;
-            return x;
-        } else {
-            Link<E> x = last;
-            for (int i = size - 1; i > index; i--)
-                x = x.prev;
-            return x;
-        }
-        }
+	public Link<E> link(int index) {
+		// assert isElementIndex(index);
+
+		if (index < (size >> 1)) {
+			Link<E> x = first;
+			for (int i = 0; i < index; i++)
+				x = x.next;
+			return x;
+		} else {
+			Link<E> x = last;
+			for (int i = size - 1; i > index; i--)
+				x = x.prev;
+			return x;
+		}
+	}
 
 	public E remove(int index) {
-		
-		if(!(index >= 0 && index <= size)){
+
+		if (!(index >= 0 && index <= size)) {
 			throw new IndexOutOfBoundsException();
 		}
-		
-		    final Link<E> x = link(index);
-		    final E element = x.data;
-	        final Link<E> next = x.next;
-	        final Link<E> prev = x.prev;
 
-	        if (prev == null) {
-	            first = next;
-	        } else {
-	            prev.next = next;
-	            x.prev = null;
-	        }
+		final Link<E> x = link(index);
+		final E element = x.data;
+		final Link<E> next = x.next;
+		final Link<E> prev = x.prev;
 
-	        if (next == null) {
-	            last = prev;
-	        } else {
-	            next.prev = prev;
-	            x.next = null;
-	        }
+		if (prev == null) {
+			first = next;
+		} else {
+			prev.next = next;
+			x.prev = null;
+		}
 
-	        x.data = null;
-	        size--;
+		if (next == null) {
+			last = prev;
+		} else {
+			next.prev = prev;
+			x.next = null;
+		}
+
+		x.data = null;
+		size--;
 		return element;
 	}
 
