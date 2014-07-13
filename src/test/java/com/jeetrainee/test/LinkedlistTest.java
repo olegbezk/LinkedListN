@@ -106,11 +106,17 @@ public class LinkedlistTest {
 		
 	}
 	
+	@Test
 	public void add_Sucsess(){
 		assertEquals(data.size(), 3);
 		data.add(1, "Insert");
 		assertEquals(data.size(), 4);
 		assertEquals(data.get(1), "Insert");
+	}
+	
+	@Test
+	public void get_Sucsess(){
+		assertEquals(2, data.get(2));
 	}
 
 }

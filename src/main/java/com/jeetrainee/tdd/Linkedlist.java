@@ -122,8 +122,8 @@ public class Linkedlist<E> implements List<E> {
 	}
 
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		checkElementIndex(index);
+		return link(index).data;
 	}
 
 	public void add(int index, E element) {
@@ -132,7 +132,6 @@ public class Linkedlist<E> implements List<E> {
 	}
 
 	public Link<E> link(int index) {
-		// assert isElementIndex(index);
 
 		if (index < (size >> 1)) {
 			Link<E> x = first;
@@ -149,9 +148,7 @@ public class Linkedlist<E> implements List<E> {
 
 	public E remove(int index) {
 
-		if (!(index >= 0 && index <= size)) {
-			throw new IndexOutOfBoundsException();
-		}
+		checkElementIndex(index);
 
 		final Link<E> x = link(index);
 		final E element = x.data;
@@ -181,5 +178,11 @@ public class Linkedlist<E> implements List<E> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
+	private void checkElementIndex(int index) {
+        if (!(index >= 0 && index < size))
+            throw new IndexOutOfBoundsException();
+    }
 
 }
