@@ -102,47 +102,47 @@ public class Linkedlist<E> implements List<E> {
 		size++;
 		return true;
 	}
-
+	
 	E unlink(Link<E> x) {
-		final E element = x.data;
-		final Link<E> next = x.next;
-		final Link<E> prev = x.prev;
+        final E element = x.data;
+        final Link<E> next = x.next;
+        final Link<E> prev = x.prev;
 
-		if (prev == null) {
-			first = next;
-		} else {
-			prev.next = next;
-			x.prev = null;
-		}
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            x.prev = null;
+        }
 
-		if (next == null) {
-			last = prev;
-		} else {
-			next.prev = prev;
-			x.next = null;
-		}
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+            x.next = null;
+        }
 
-		x.data = null;
-		size--;
-		return element;
-	}
+        x.data = null;
+        size--;
+        return element;
+    }
 
 	public boolean remove(Object o) {
 		if (o == null) {
-			for (Link<E> x = first; x != null; x = x.next) {
-				if (x.data == null) {
-					unlink(x);
-					return true;
-				}
-			}
-		} else {
-			for (Link<E> x = first; x != null; x = x.next) {
-				if (o.equals(x.data)) {
-					unlink(x);
-					return true;
-				}
-			}
-		}
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (x.data == null) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        } else {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.data)) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
 		return false;
 	}
 
@@ -166,36 +166,36 @@ public class Linkedlist<E> implements List<E> {
 
 	public void add(int index, E element) {
 		checkPositionIndex(index);
-
+		
 		if (index == size)
-			linkLast(element);
-		else
-			linkBefore(element, link(index));
+            linkLast(element);
+        else
+            linkBefore(element, link(index));
 
 	}
 
 	void linkBefore(E element, Link<E> link) {
 		final Link<E> pred = link.prev;
-		final Link<E> newNode = new Link<>(pred, element, link);
-		link.prev = newNode;
-		if (pred == null)
-			first = newNode;
-		else
-			pred.next = newNode;
-		size++;
-
+        final Link<E> newNode = new Link<>(pred, element, link);
+        link.prev = newNode;
+        if (pred == null)
+            first = newNode;
+        else
+            pred.next = newNode;
+        size++;
+		
 	}
 
-	void linkLast(E element) {
+ void linkLast(E element) {
 		final Link<E> l = last;
-		final Link<E> newNode = new Link<>(l, element, null);
-		last = newNode;
-		if (l == null)
-			first = newNode;
-		else
-			l.next = newNode;
-		size++;
-
+        final Link<E> newNode = new Link<>(l, element, null);
+        last = newNode;
+        if (l == null)
+            first = newNode;
+        else
+            l.next = newNode;
+        size++;
+		
 	}
 
 	public Link<E> link(int index) {
@@ -222,30 +222,31 @@ public class Linkedlist<E> implements List<E> {
 
 	public int indexOf(Object o) {
 		int index = 0;
-		if (o == null) {
-			for (Link<E> x = first; x != null; x = x.next) {
-				if (x.data == null)
-					return index;
-				index++;
-			}
-		} else {
-			for (Link<E> x = first; x != null; x = x.next) {
-				if (o.equals(x.data))
-					return index;
-				index++;
-			}
-		}
-		return -1;
+        if (o == null) {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (x.data == null)
+                    return index;
+                index++;
+            }
+        } else {
+            for (Link<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.data))
+                    return index;
+                index++;
+            }
+        }
+        return -1;
 	}
-
+	
 	private void checkElementIndex(int index) {
-		if (!(index >= 0 && index < size))
-			throw new IndexOutOfBoundsException();
-	}
-
+        if (!(index >= 0 && index < size))
+            throw new IndexOutOfBoundsException();
+    }
+	
 	private void checkPositionIndex(int index) {
-		if (!(index >= 0 && index <= size))
-			throw new IndexOutOfBoundsException();
-	}
+        if (!(index >= 0 && index <= size))
+            throw new IndexOutOfBoundsException();
+    }
+	
 
 }
