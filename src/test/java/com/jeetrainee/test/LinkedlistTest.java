@@ -33,14 +33,6 @@ public class LinkedlistTest {
 	}
 
 	@Test
-	public void testInsert() {
-		assertEquals(data.size(), 3);
-		data.add(1, "Insert");
-		assertEquals(data.size(), 4);
-		assertEquals(data.get(1), "Insert");
-	}
-
-	@Test
 	public void testRemove() {
 		assertEquals(data.size(), 3);
 		data.remove(1);
@@ -89,7 +81,7 @@ public class LinkedlistTest {
 	}
 	
 	@Test
-	public void testSize(){
+	public void size(){
 		assertEquals(3, data.size());
 	}
 	
@@ -105,6 +97,18 @@ public class LinkedlistTest {
 	public void testClear(){
 		assertEquals(null, data.get(0));
 		assertEquals(0, data.size());
+	}
+	
+	@Test
+//	public void testAdd_ClassCast(){
+//		
+//	}
+	
+	public void add_Sucsess(){
+		assertEquals(data.size(), 3);
+		data.add(1, "Insert");
+		assertEquals(data.size(), 4);
+		assertEquals(data.get(1), "Insert");
 	}
 
 }
